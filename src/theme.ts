@@ -13,14 +13,17 @@ export const theme: DefaultTheme = {
     white: "#ffffff",
     black: "#000000",
     gray: "#b0b0b0",
+    lightPurple: "#dacef5;",
     purple: "#6941c6",
     border: "#e4e7ec",
+    rowGreyBg: "#f2f2f2",
   },
   spacing: {
     xxs: "2px",
     xs: "4px",
     sm: "8px",
     md: "16px",
+    mmd: "20px",
     lg: "24px",
     xl: "32px",
     xxl: "48px",
@@ -42,11 +45,13 @@ export const theme: DefaultTheme = {
   sizes: {
     width: {
       full: "100%",
+      search: "299px",
       container: "1200px",
       smallContainer: "960px",
     },
     height: {
       full: "100vh",
+      search: "32px",
       header: "68px",
       footer: "68px",
     },
@@ -72,6 +77,34 @@ export const theme: DefaultTheme = {
     medium: 0.5,
     high: 0.75,
     full: 1,
+  },
+  position: {
+    static: 'static',
+    relative: 'relative',
+    absolute: 'absolute',
+    fixed: 'fixed',
+    sticky: 'sticky',
+    top: {
+      small: '8px',
+      medium: '16px',
+      large: '32px',
+      fiftyPercent: '50%',
+    },
+    right: {
+      small: '8px',
+      medium: '16px',
+      large: '32px',
+    },
+    bottom: {
+      small: '8px',
+      medium: '16px',
+      large: '32px',
+    },
+    left: {
+      small: '8px',
+      medium: '16px',
+      large: '32px',
+    },
   },
   shadows: {
     small: "0px 2px 4px rgba(0, 0, 0, 0.1)",

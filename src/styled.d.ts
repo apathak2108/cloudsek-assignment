@@ -14,14 +14,17 @@ declare module "styled-components" {
       white: string;
       black: string;
       gray: string;
-      purple: string,
-      border: string,
+      lightPurple: string;
+      purple: string;
+      border: string;
+      rowGreyBg: string;
     };
     spacing: {
       xxs: string;
       xs: string;
       sm: string;
       md: string;
+      mmd: string;
       lg: string;
       xl: string;
       xxl: string;
@@ -43,11 +46,13 @@ declare module "styled-components" {
     sizes: {
       width: {
         full: string;
+        search: string;
         container: string;
         smallContainer: string;
       };
       height: {
         full: string;
+        search: string;
         header: string;
         footer: string;
       };
@@ -73,6 +78,34 @@ declare module "styled-components" {
       medium: number;
       bold: number;
       extraBold: number;
+    };
+    position: {
+      static: string;
+      relative: string;
+      absolute: string;
+      fixed: string;
+      sticky: string;
+      top: {
+        small: string;
+        medium: string;
+        large: string;
+        fiftyPercent: string,
+      };
+      right: {
+        small: string;
+        medium: string;
+        large: string;
+      };
+      bottom: {
+        small: string;
+        medium: string;
+        large: string;
+      };
+      left: {
+        small: string;
+        medium: string;
+        large: string;
+      };
     };
     shadows: {
       small: string;

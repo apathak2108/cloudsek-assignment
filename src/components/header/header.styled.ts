@@ -10,12 +10,15 @@ export const StyledHeaderContainer = styled.header`
 `;
 
 export const StyledHeaderInnerLeftContainer = styled.section`
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-left: ${({ theme }) => theme.spacing.lg};
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
 `;
 
-export const StyledHeaderInnerRightContainer = styled.section``;
+export const StyledHeaderInnerRightContainer = styled.section`
+  margin-right: ${({ theme }) => theme.spacing.lg};
+`;
 
 export const StyledHeading = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.lg};

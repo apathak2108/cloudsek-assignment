@@ -6,5 +6,5 @@ export const StyledFooterContainer = styled.footer`
   border-top: 1px solid ${({ theme }) => theme.colors.border}; 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `;

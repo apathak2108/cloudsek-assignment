@@ -6,6 +6,7 @@ export const StyledLayout = styled.main`
 `;
 
 export const StyledChildrenContainer = styled.div`
-  height: calc(100vh - 70px);
+  height: calc(100vh - 138px);
   width: ${({ theme }) => theme.sizes.width.full};
+  overflow-y: scroll;
 `;
