@@ -1,17 +1,29 @@
 import React from "react";
 import {
+  StyledName,
   StyledNameAndUsernameContainer,
   StyledProfilePic,
   StyledUserCatalogueContainer,
 } from "./catalogue.styled";
+import { STRINGS } from "../../constants";
 
-const UserCatalogue: React.FC = () => {
+interface UserCatalogueProps {
+  name: string;
+  username: string;
+  image: string;
+}
+
+const UserCatalogue: React.FC<UserCatalogueProps> = ({
+  name,
+  username,
+  image,
+}) => {
   return (
     <StyledUserCatalogueContainer>
-      <StyledProfilePic src="https://logo.clearbit.com/vistaprint.com" alt="" />
+      <StyledProfilePic src={image} alt={STRINGS.PROFILE_PIC} />
       <StyledNameAndUsernameContainer>
-        <span>Ananya Pathak</span>
-        <span>@ananya</span>
+        <StyledName>{name}</StyledName>
+        <span>{username}</span>
       </StyledNameAndUsernameContainer>
     </StyledUserCatalogueContainer>
   );

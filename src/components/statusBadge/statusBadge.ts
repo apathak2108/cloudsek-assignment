@@ -10,11 +10,12 @@ export const StyledBadgeContainer = styled.div`
   line-height: 18px;
   font-weight: 500;
   align-items: center;
+  width: fit-content;
 `;
 
-export const StyledCircle = styled.div`
+export const StyledCircle = styled.div<{ status: boolean }>`
   height: 8px;
   width: 8px;
   border-radius: 50%;
-  background-color: #17B26A;
+  background-color: ${({ status }) => (status ? "#17B26A" : "grey")};
 `;

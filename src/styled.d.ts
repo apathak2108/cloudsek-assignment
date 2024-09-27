@@ -18,11 +18,13 @@ declare module "styled-components" {
       purple: string;
       border: string;
       rowGreyBg: string;
+      disabled: string;
     };
     spacing: {
       xxs: string;
       xs: string;
       sm: string;
+      smm: string;
       md: string;
       mmd: string;
       lg: string;
@@ -48,12 +50,14 @@ declare module "styled-components" {
         full: string;
         search: string;
         container: string;
+        btnWidth: string;
         smallContainer: string;
       };
       height: {
         full: string;
         search: string;
         header: string;
+        btnHeight: string;
         footer: string;
       };
     };
@@ -89,7 +93,7 @@ declare module "styled-components" {
         small: string;
         medium: string;
         large: string;
-        fiftyPercent: string,
+        fiftyPercent: string;
       };
       right: {
         small: string;

@@ -1,11 +1,16 @@
 import React from "react";
 import { StyledBadgeContainer, StyledCircle } from "./statusBadge";
+import { STRINGS } from "../../constants";
 
-const StatusBadge: React.FC = () => {
+interface StatusBadgeProps {
+  status: boolean;
+}
+
+const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
   return (
     <StyledBadgeContainer>
-      <StyledCircle />
-      <span>Active</span>
+      <StyledCircle status={status} />
+      <span>{status ? STRINGS.ACTIVE : STRINGS.INACTIVE}</span>
     </StyledBadgeContainer>
   );
 };

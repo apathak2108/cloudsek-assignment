@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const StyledSearchContainer = styled.div`
   position: ${({ theme }) => theme.position.relative};
   display: inline-block;
+  margin-right: ${({ theme }) => theme.spacing.lg};
+  
+  @media (max-width: 524px) {
+    margin-left: ${({ theme }) => theme.spacing.md};
+  }
 `;
 
 export const SearchInput = styled.input`

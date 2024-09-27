@@ -1,62 +1,75 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
+  LoaderWrapper,
   StyledTable,
   StyledTableCell,
+  StyledTableCellForBadge,
   StyledTableContainer,
   StyledTableHead,
   StyledTableHeader,
   StyledTableRow,
 } from "./table.styled";
-
-const createData: Function = (
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) => {
-  return { name, calories, fat, carbs, protein };
-};
+import UserCatalogue from "../catalogue";
+import { STRINGS, TABLE_HEADINGS } from "../../constants";
+import StatusBadge from "../statusBadge";
+import { useDispatch, useSelector } from "react-redux";
+import { searchUsers } from "../../redux/actions/homeActions";
+import { RootState } from "../../redux/rootReducer";
+import Loader from "../loader";
+import Badge from "../badge";
+import { capitalizeFirstLetter } from "../../utils";
 
 const CustomTable: React.FC = () => {
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
+  const dispatch = useDispatch();
+  const { users, loading, error } = useSelector(
+    (state: RootState) => state.home
+  );
 
-  ];
+  useEffect(() => {
+    dispatch(searchUsers("", "", 8));
+  }, [dispatch]);
+
   return (
     <StyledTableContainer>
       <StyledTable>
         <StyledTableHead>
-          <StyledTableRow>
-            <StyledTableHeader>Name</StyledTableHeader>
-            <StyledTableHeader>Status</StyledTableHeader>
-            <StyledTableHeader>Role</StyledTableHeader>
-            <StyledTableHeader>Email address</StyledTableHeader>
-            <StyledTableHeader>Teams</StyledTableHeader>
+          <StyledTableRow active={true}>
+            {TABLE_HEADINGS.map((heading, index) => (
+              <StyledTableHeader key={index}>{heading}</StyledTableHeader>
+            ))}
           </StyledTableRow>
         </StyledTableHead>
         <tbody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell>{row.name}</StyledTableCell>
-              <StyledTableCell>{row.calories}</StyledTableCell>
-              <StyledTableCell>{row.fat}</StyledTableCell>
-              <StyledTableCell>{row.carbs}</StyledTableCell>
-              <StyledTableCell>{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {loading && !error && (
+            <LoaderWrapper>
+              <Loader />
+            </LoaderWrapper>
+          )}
+          {!loading && error && <LoaderWrapper>{error}</LoaderWrapper>}
+          {!loading &&
+            !error &&
+            users?.length > 0 &&
+            users.map((user: any, index: number) => (
+              <StyledTableRow key={index} active={user.active}>
+                <StyledTableCell>
+                  <UserCatalogue
+                    name={`${user.first_name} ${user.last_name}`}
+                    username={`@${user.first_name}`}
+                    image={user.profile_picture}
+                  />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <StatusBadge status={user.active} />
+                </StyledTableCell>
+                <StyledTableCell>{user.role}</StyledTableCell>
+                <StyledTableCell>{user.email}</StyledTableCell>
+                <StyledTableCellForBadge>
+                  {JSON.parse(user.teams).map((team: string, index: number) => (
+                    <Badge key={index} value={capitalizeFirstLetter(team)} />
+                  ))}
+                </StyledTableCellForBadge>
+              </StyledTableRow>
+            ))}
         </tbody>
       </StyledTable>
     </StyledTableContainer>

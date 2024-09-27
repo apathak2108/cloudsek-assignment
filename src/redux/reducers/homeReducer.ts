@@ -1,25 +1,74 @@
+import { AnyAction } from "redux";
 import { SetDataAction } from "../actions/homeActions";
-import { SET_DATA } from "../actionTypes";
+import {
+  GET_USERS_DATA_FAILURE,
+  GET_USERS_DATA_REQUEST,
+  GET_USERS_DATA_SUCCESS,
+  GET_USERS_COUNT_FAILURE,
+  GET_USERS_COUNT_REQUEST,
+  GET_USERS_COUNT_SUCCESS,
+  GET_SEARCHED_USER_REQUEST,
+  GET_SEARCHED_USER_SUCCESS,
+  GET_SEARCHED_USER_FAILURE,
+} from "../actionTypes";
 
 interface HomeState {
-  data: string;
+  users: any;
   loading: boolean;
+  error: string;
+  count: number;
 }
 
 const initialState: HomeState = {
-  data: "",
+  users: [],
+  count: 0,
   loading: false,
+  error: "",
 };
 
 const homeReducer = (
   state = initialState,
-  action: SetDataAction
+  action: SetDataAction | AnyAction
 ): HomeState => {
   switch (action.type) {
-    case SET_DATA:
+    case GET_USERS_DATA_REQUEST:
+    case GET_SEARCHED_USER_REQUEST:
       return {
         ...state,
-        data: action.payload,
+        loading: true,
+      };
+    case GET_USERS_DATA_SUCCESS:
+    case GET_SEARCHED_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: action.payload,
+        error: "",
+      };
+    case GET_USERS_DATA_FAILURE:
+    case GET_SEARCHED_USER_FAILURE: 
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case GET_USERS_COUNT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_USERS_COUNT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        count: action.payload,
+        error: "",
+      };
+    case GET_USERS_COUNT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
       };
     default:
       return state;
