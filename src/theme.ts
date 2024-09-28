@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components";
 export const theme: DefaultTheme = {
   colors: {
     primary: "#0070f3",
-    secondary: "#1DB954",
+    secondary: "#17B26A",
     background: "#f5f5f5",
     text: "#333",
     error: "#ff4d4d",
@@ -18,6 +18,7 @@ export const theme: DefaultTheme = {
     border: "#e4e7ec",
     rowGreyBg: "#f2f2f2",
     disabled: "#f0f0f0",
+    btnBg: "#e9e9e9",
   },
   spacing: {
     xxs: "2px",
@@ -61,6 +62,7 @@ export const theme: DefaultTheme = {
     },
   },
   fontSizes: {
+    xxs: "11px",
     xs: "12px",
     sm: "14px",
     md: "16px",
@@ -111,7 +113,7 @@ export const theme: DefaultTheme = {
     },
   },
   shadows: {
-    small: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+    small: "0px 1px 2px 0px #1018280d",
     medium: "0px 4px 8px rgba(0, 0, 0, 0.15)",
     large: "0px 8px 16px rgba(0, 0, 0, 0.2)",
   },

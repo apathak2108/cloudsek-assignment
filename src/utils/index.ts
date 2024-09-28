@@ -1,6 +1,8 @@
+import { StringMappingType } from "typescript";
+
 // made for capitalizing the first letter of type value
 export const capitalizeFirstLetter = (string: string): string => {
-  if (!string) return string; // Handle empty string
+  if (!string) return string;
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
@@ -8,7 +10,7 @@ export const capitalizeFirstLetter = (string: string): string => {
 export const debounce = (func: (...args: any[]) => void, delay: number) => {
   let timeoutId: NodeJS.Timeout;
 
-  return (...args: any[]) => {
+  return (...args: string[]) => {
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
@@ -20,7 +22,10 @@ export const debounce = (func: (...args: any[]) => void, delay: number) => {
 };
 
 //pagination logic
-export const generatePageNumbers = (totalPages: number, currentPage: number) => {
+export const generatePageNumbers = (
+  totalPages: number,
+  currentPage: number
+) => {
   const pages: (number | string)[] = [];
   const maxButtons = 5;
   const sidePages = 0;
@@ -47,4 +52,13 @@ export const generatePageNumbers = (totalPages: number, currentPage: number) => 
     pages.splice(4, 1);
   }
   return pages;
+};
+
+//logic to get total number of pages
+export const getTotalPages = (totalUsers: number, limit: number) => {
+  const totalPages =
+    totalUsers % limit === 0
+      ? Math.floor(totalUsers / limit)
+      : Math.floor(totalUsers / limit) + 1;
+  return totalPages;
 };

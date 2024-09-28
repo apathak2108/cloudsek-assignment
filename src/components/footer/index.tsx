@@ -4,20 +4,19 @@ import Pagination from "../pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import { searchUsers } from "../../redux/actions/homeActions";
+import { getTotalPages } from "../../utils";
+import { STRINGS } from "../../constants";
 
 const Footer: React.FC = () => {
   const dispatch = useDispatch();
   const limit = 8;
   const totalUsers = useSelector((state: RootState) => state.home.count);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages =
-    totalUsers % limit === 0
-      ? Math.floor(totalUsers / limit)
-      : Math.floor(totalUsers / limit) + 1;
+  const totalPages = getTotalPages(totalUsers, limit);
 
   const handlePageChange = (page: number): void => {
     setCurrentPage(page);
-    dispatch(searchUsers("", page, limit));
+    dispatch(searchUsers(STRINGS.EMPTY_STRING, page, limit));
   };
 
   return (

@@ -40,7 +40,7 @@ const Pagination: React.FC<PaginationProps> = ({
               {page}
             </StyledPaginationButton>
           ) : (
-            <StyledThreeDots key={index}>...</StyledThreeDots>
+            <StyledThreeDots key={index}>{STRINGS.THREE_DOTS}</StyledThreeDots>
           )
         )}
       </StyledPaginationButtonsContainer>

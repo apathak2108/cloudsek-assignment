@@ -18,13 +18,13 @@ import { debounce } from "../../utils";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>(STRINGS.EMPTY_STRING);
   const count = useSelector((state: RootState) => state.home.count);
   const loading = useSelector((state: RootState) => state.home.loading);
 
   const debouncedSearch = debounce((query: string) => {
-    dispatch(searchUsers(query, "", 8));
-  }, 25);
+    dispatch(searchUsers(query, STRINGS.EMPTY_STRING, 8));
+  }, 10);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

@@ -19,6 +19,7 @@ declare module "styled-components" {
       border: string;
       rowGreyBg: string;
       disabled: string;
+      btnBg: string;
     };
     spacing: {
       xxs: string;
@@ -69,6 +70,7 @@ declare module "styled-components" {
       full: number;
     };
     fontSizes: {
+      xxs: string;
       xs: string;
       sm: string;
       md: string;
