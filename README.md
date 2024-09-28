@@ -24,7 +24,7 @@ cd path/to/your/directory
 ```
 
 4. **Clone the Repository**: Use the `git clone` command followed by the given repository URL:
-   https://github.com/apathak2108/the-alter-office-assignment.git
+   https://github.com/apathak2108/cloudsek-assignment.git
 
 6. **Enter the Project Directory**: After cloning, navigate into the cloned repository's directory by entering given command:
    cd your-repo-name
