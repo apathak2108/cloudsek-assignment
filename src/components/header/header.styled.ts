@@ -15,8 +15,8 @@ export const StyledHeaderInnerLeftContainer = styled.section`
   display: flex;
   align-items: center;
 
-  @media (max-width: 624px) {
-    margin-left: ${({ theme }) => theme.spacing.sm};
+    @media (max-width: 624px) {
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
 
@@ -24,7 +24,7 @@ export const StyledHeaderInnerRightContainer = styled.section`
   margin-right: ${({ theme }) => theme.spacing.lg};
 
   @media (max-width: 624px) {
-    margin-right: ${({ theme }) => theme.spacing.sm};
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
 

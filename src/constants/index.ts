@@ -11,6 +11,9 @@ export const STRINGS = {
   ACTIVE: "Active",
   INACTIVE: "Inactive",
   NO_USERS_MSG: "No users found",
+  EMPTY_STRING: "",
+  THREE_DOTS: "...",
+  NUMBER: "number",
 } as const;
 
 export const URL = {

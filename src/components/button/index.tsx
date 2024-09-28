@@ -15,10 +15,8 @@ const Button: React.FC<ButtonProps> = ({ name, onClick, disabled }) => {
     const checkScreenWidth = () => {
       setIsSmallScreen(window.innerWidth < 544);
     };
-
     checkScreenWidth();
     window.addEventListener("resize", checkScreenWidth);
-
     return () => window.removeEventListener("resize", checkScreenWidth);
   }, []);
   return (

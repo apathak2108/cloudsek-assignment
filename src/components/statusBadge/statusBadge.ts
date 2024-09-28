@@ -1,21 +1,23 @@
 import styled from "styled-components";
 
 export const StyledBadgeContainer = styled.div`
-  padding: 2px 6px;
-  border-radius: 6px;
+  padding: ${({ theme }) => theme.spacing.xxs}
+    ${({ theme }) => theme.spacing.sm};
+  border-radius: ${({ theme }) => theme.spacing.sm};
   border: 1px solid #d0d5dd;
   display: flex;
-  gap: 4px;
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 500;
+  gap: ${({ theme }) => theme.spacing.xs};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  line-height: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
   align-items: center;
   width: fit-content;
 `;
 
 export const StyledCircle = styled.div<{ status: boolean }>`
-  height: 8px;
-  width: 8px;
-  border-radius: 50%;
-  background-color: ${({ status }) => (status ? "#17B26A" : "grey")};
+  height: ${({ theme }) => theme.spacing.sm};
+  width: ${({ theme }) => theme.spacing.sm};
+  border-radius: ${({ theme }) => theme.borderRadius.rounded};
+  background-color: ${({ status, theme }) =>
+    status ? theme.colors.secondary : theme.colors.gray};
 `;

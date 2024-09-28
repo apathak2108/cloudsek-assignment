@@ -17,6 +17,10 @@ export const SearchInput = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.small};
   outline: none;
+
+  &::placeholder {
+    font-size: ${({theme}) => theme.fontSizes.xxs}
+  }
 `;
 
 export const StyledSearchIcon = styled.img`

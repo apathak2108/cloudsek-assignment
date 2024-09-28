@@ -1,29 +1,30 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.div<{ disabled: boolean }>`
-  box-shadow: 0px 1px 2px 0px #1018280d;
-  border: 1px solid #d0d5dd;
-  padding: 8px 12px;
-  border-radius: 8px;
+  box-shadow: ${({ theme }) => theme.shadows.small};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  padding: ${({ theme }) => theme.spacing.sm}
+    ${({ theme }) => theme.spacing.smm};
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  gap: ${({ theme }) => theme.spacing.xs};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
 
   &:hover {
-    background-color: #e9e9e9;
+    background-color: ${({ theme }) => theme.colors.btnBg};
   }
 
   @media (max-width: 624px) {
-    padding: 4px 8px;
-    font-size: 10px;
-    gap: 2px;
-  }
+    padding: ${({ theme }) => theme.spacing.xs}
+    ${({ theme }) => theme.spacing.sm};
+    font-size: ${({ theme }) => theme.fontSizes.xxs}
+    gap: ${({ theme }) => theme.spacing.xxs}  }
 `;
 
 export const StyledArrowIcon = styled.img``;

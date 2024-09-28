@@ -26,7 +26,7 @@ const CustomTable: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(searchUsers("", "", 8));
+    dispatch(searchUsers(STRINGS.EMPTY_STRING, STRINGS.EMPTY_STRING, 8));
   }, [dispatch]);
 
   return (

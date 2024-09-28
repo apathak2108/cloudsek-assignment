@@ -75,7 +75,7 @@ export const searchUsers = (
 ) => {
   return async (dispatch: Dispatch) => {
     dispatch({ type: GET_SEARCHED_USER_REQUEST });
-    if (query.trim() === "") {
+    if (query.trim() === STRINGS.EMPTY_STRING) {
       return dispatch(getUsersData(page, limit));
     }
     try {
@@ -87,7 +87,6 @@ export const searchUsers = (
       );
 
       const result = await Promise.race([firstNamePromise, lastNamePromise]);
-      console.log(result, "result");
       if (result.data.length > 0) {
         dispatch({
           type: GET_SEARCHED_USER_SUCCESS,

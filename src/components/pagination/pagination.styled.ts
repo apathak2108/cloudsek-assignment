@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const StyledPaginationContainer = styled.div`
   width: ${({ theme }) => theme.sizes.width.full};
-  padding: 0 24px;
+  padding: 0 ${({ theme }) => theme.spacing.lg};
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   @media (max-width: 476px) {
-    padding: 0 8px;
+    padding: 0 ${({ theme }) => theme.spacing.sm};
   }
 `;
 
@@ -42,9 +42,9 @@ export const StyledPaginationButton = styled.button<{ active: boolean }>`
   }
 
   @media (max-width: 624px) {
-    height: 24px;
-    width: 24px;
-    margin: 0 2px;
+    height: ${({ theme }) => theme.spacing.lg};
+    width: ${({ theme }) => theme.spacing.lg};
+    margin: 0 ${({ theme }) => theme.spacing.xxs};
     display: flex;
     align-items: center;
     justify-content: center;
