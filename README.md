@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+**Deployed URL :** [https://cloudsek-assignment-alpha.vercel.app/](https://cloudsek-assignment-alpha.vercel.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Screenshots of Web View**
 
-## Available Scripts
+![Web View Screenshot](https://i.postimg.cc/XvxynTbQ/Cloud-SEK-Assignment.png)
 
-In the project directory, you can run:
+![Web View Screenshot](https://i.postimg.cc/DwTg0k9T/Cloud-SEK-Assignment-1.png)
 
-### `npm start`
+**Screenshot of Mobile View**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Web View Screenshot](https://i.postimg.cc/bwpx80nY/Whats-App-Image-2024-09-28-at-8-37-31-AM.jpg)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## To run the project on your machine, follow the given steps:-
 
-### `npm test`
+1. **Install Git**: Ensure that Git is installed on your machine. If not, do it by the following link:
+   https://git-scm.com/downloads
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Open a Terminal or Command Prompt**: Access your terminal (macOS/Linux) or command prompt (Windows). You can also use Git Bash if you’re on Windows.
 
-### `npm run build`
+3. **Navigate to the Desired Directory**: Change to the directory where you want to clone the repository. Use the "cd" command to navigate. For example:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+cd path/to/your/directory
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Clone the Repository**: Use the `git clone` command followed by the given repository URL:
+   https://github.com/apathak2108/the-alter-office-assignment.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6. **Enter the Project Directory**: After cloning, navigate into the cloned repository's directory by entering given command:
+   cd your-repo-name
 
-### `npm run eject`
+## Running the Project
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+After cloning the repository, follow these steps to set up and run the React project locally:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6. **Install Dependencies**: Navigate to the project directory and install the necessary dependencies:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm install
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+7. **Start the Development Server**: Run the following command to start the development server:
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Now the project will run on http://localhost:3000
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Additional Information
+
+The tech stack of this project is **React, TypeScript, and Redux**
+
+### Theme
+
+This project uses a custom theme built to maintain consistency in the look and feel of the application across all components. The theme is defined globally and is applied using styled-components. The theme is implemented using **styled-components** and injected into the application via the **ThemeProvider**. 
+
+### Styling
+
+This project uses a combination of styling methods:
+
+- **Styled-Components**: I have used [styled-components](https://styled-components.com/) for component-level styling. It allows writing CSS in JavaScript and ensures styles are scoped to components.
+
+- **Vanilla CSS**: Some global styles and layout-related CSS are written using traditional CSS. This is used for styles that apply across multiple components or for legacy styles.
+
+
+### State Management
+
+- **Redux**: The application uses [Redux](https://redux.js.org/) for state management. Redux is set up in the `src/redux` directory, with reducers combined in `rootReducer.js`.
+
+- **Actions and Reducers**: Defined in the `src/redux` directory. Each module has its own slice.
+
+- **Usage**: Components use `useDispatch` and `useSelector` hooks from `react-redux`.
