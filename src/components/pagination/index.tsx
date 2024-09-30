@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../button";
 import { STRINGS } from "../../constants";
 import {
@@ -20,7 +20,11 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  const pages = generatePageNumbers(totalPages, currentPage);
+  const [pages, setPages] = useState<(number | string)[]>([]);
+  useEffect(() => {
+    const generatedPages = generatePageNumbers(totalPages, currentPage);
+    setPages(generatedPages);
+  }, [totalPages, currentPage]);
 
   return (
     <StyledPaginationContainer>

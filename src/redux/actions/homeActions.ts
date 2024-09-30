@@ -74,35 +74,53 @@ export const searchUsers = (
   limit: number
 ) => {
   return async (dispatch: Dispatch) => {
-    dispatch({ type: GET_SEARCHED_USER_REQUEST });
     if (query.trim() === STRINGS.EMPTY_STRING) {
+      dispatch({ type: GET_SEARCHED_USER_REQUEST });
       return dispatch(getUsersData(page, limit));
-    }
-    try {
-      const firstNamePromise = axios.get(
-        `${API_URL}?_limit=${limit}&first_name=${capitalizeFirstLetter(query)}`
-      );
-      const lastNamePromise = axios.get(
-        `${API_URL}?_limit=${limit}&last_name=${capitalizeFirstLetter(query)}`
-      );
+    } else if (query.length > 2) {
+      try {
+        dispatch({ type: GET_SEARCHED_USER_REQUEST });
 
-      const result = await Promise.race([firstNamePromise, lastNamePromise]);
-      if (result.data.length > 0) {
+        const firstNamePromise = axios.get(
+          `${API_URL}?_limit=${limit}&first_name=${capitalizeFirstLetter(
+            query
+          )}`
+        );
+        const lastNamePromise = axios.get(
+          `${API_URL}?_limit=${limit}&last_name=${capitalizeFirstLetter(query)}`
+        );
+
+        const result = await Promise.all([firstNamePromise, lastNamePromise]);
+
+        const firstNameUsers = result?.[0]?.data || [];
+        const lastNameUsers = result?.[1]?.data || [];
+
+        const mergedUsers = [...firstNameUsers, ...lastNameUsers].reduce(
+          (acc: Record<number, any>, user: any) => {
+            acc[user.id] = user;
+            return acc;
+          },
+          {}
+        );
+        const uniqueUsers = Object.values(mergedUsers);
+
+        if (uniqueUsers.length > 0) {
+          dispatch({
+            type: GET_SEARCHED_USER_SUCCESS,
+            payload: uniqueUsers,
+          });
+        } else {
+          dispatch({
+            type: GET_SEARCHED_USER_FAILURE,
+            error: "No users found",
+          });
+        }
+      } catch (error) {
         dispatch({
-          type: GET_SEARCHED_USER_SUCCESS,
-          payload: result.data,
-        });
-      } else {
-        dispatch({
-          type: GET_SEARCHED_USER_FAILURE,
-          error: STRINGS.NO_USERS_MSG,
+          type: GET_USERS_DATA_FAILURE,
+          error: (error as any).message,
         });
       }
-    } catch (error) {
-      dispatch({
-        type: GET_USERS_DATA_FAILURE,
-        error: (error as any).message,
-      });
     }
   };
 };
