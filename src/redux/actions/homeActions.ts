@@ -13,7 +13,7 @@ import {
   SET_DATA,
 } from "../actionTypes";
 import { Dispatch } from "redux";
-import { capitalizeFirstLetter } from "../../utils";
+import { capitalizeFirstLetter, mergeUniqueUsers } from "../../utils";
 
 export interface SetDataAction {
   type: typeof SET_DATA;
@@ -95,14 +95,7 @@ export const searchUsers = (
         const firstNameUsers = result?.[0]?.data || [];
         const lastNameUsers = result?.[1]?.data || [];
 
-        const mergedUsers = [...firstNameUsers, ...lastNameUsers].reduce(
-          (acc: Record<number, any>, user: any) => {
-            acc[user.id] = user;
-            return acc;
-          },
-          {}
-        );
-        const uniqueUsers = Object.values(mergedUsers);
+        const uniqueUsers = mergeUniqueUsers(firstNameUsers, lastNameUsers);
 
         if (uniqueUsers.length > 0) {
           dispatch({

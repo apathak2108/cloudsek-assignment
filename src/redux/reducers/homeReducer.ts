@@ -51,6 +51,7 @@ const homeReducer = (
         ...state,
         loading: false,
         error: action.error,
+        users: [],
       };
     case GET_USERS_COUNT_REQUEST:
       return {
