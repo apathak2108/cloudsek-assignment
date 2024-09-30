@@ -24,7 +24,7 @@ const Header: React.FC = () => {
 
   const debouncedSearch = debounce((query: string) => {
     dispatch(searchUsers(query, STRINGS.EMPTY_STRING, 8));
-  }, 300);
+  }, 500);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
