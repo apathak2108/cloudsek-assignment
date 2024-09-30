@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Button from "../button";
 import { STRINGS } from "../../constants";
 import {
@@ -7,7 +7,7 @@ import {
   StyledPaginationContainer,
   StyledThreeDots,
 } from "./pagination.styled";
-import { generatePageNumbers } from "../../utils";
+import usePagination, { DOTS } from "../../hooks/usePagination";
 
 interface PaginationProps {
   currentPage: number;
@@ -20,11 +20,16 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  const [pages, setPages] = useState<(number | string)[]>([]);
-  useEffect(() => {
-    const generatedPages = generatePageNumbers(totalPages, currentPage);
-    setPages(generatedPages);
-  }, [totalPages, currentPage]);
+  const siblingCount = 1;
+  const pageSize = 1;
+  const totalCount = totalPages * pageSize;
+
+  const paginationRange = usePagination({
+    totalCount,
+    pageSize,
+    siblingCount,
+    currentPage,
+  });
 
   return (
     <StyledPaginationContainer>
@@ -34,17 +39,17 @@ const Pagination: React.FC<PaginationProps> = ({
         onClick={() => onPageChange(currentPage - 1)}
       />
       <StyledPaginationButtonsContainer>
-        {pages?.map((page, index) =>
-          typeof page === "number" ? (
+        {paginationRange?.map((page, index) =>
+          page === DOTS ? (
+            <StyledThreeDots key={index}>{STRINGS.THREE_DOTS}</StyledThreeDots>
+          ) : (
             <StyledPaginationButton
               key={index}
               active={currentPage === page}
-              onClick={() => onPageChange(page)}
+              onClick={() => onPageChange(Number(page))}
             >
               {page}
             </StyledPaginationButton>
-          ) : (
-            <StyledThreeDots key={index}>{STRINGS.THREE_DOTS}</StyledThreeDots>
           )
         )}
       </StyledPaginationButtonsContainer>

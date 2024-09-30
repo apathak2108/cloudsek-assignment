@@ -1,11 +1,11 @@
 import React from "react";
-import HomeContainer from "../../containers/home";
 import Layout from "../../components/layout";
+import CustomTable from "../../components/table";
 
 const HomeAdaptive: React.FC = () => {
   return (
     <Layout>
-      <HomeContainer />
+      <CustomTable />
     </Layout>
   );
 };
