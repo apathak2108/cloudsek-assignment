@@ -1,4 +1,4 @@
-import { StringMappingType } from "typescript";
+import { LIMIT } from "../constants";
 
 // made for capitalizing the first letter of type value
 export const capitalizeFirstLetter = (string: string): string => {
@@ -24,9 +24,7 @@ export const debounce = (callback: (...args: any[]) => void, delay: number) => {
 //logic to get total number of pages
 export const getTotalPages = (totalUsers: number, limit: number) => {
   const totalPages =
-    totalUsers % limit === 0
-      ? Math.floor(totalUsers / limit)
-      : Math.floor(totalUsers / limit) + 1;
+    Math.ceil(totalUsers / LIMIT);
   return totalPages;
 };
 

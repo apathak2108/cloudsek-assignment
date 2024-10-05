@@ -8,14 +8,9 @@ import {
   StyledThreeDots,
 } from "./pagination.styled";
 import usePagination, { DOTS } from "../../hooks/usePagination";
+import { IPaginationProps } from "../../types";
 
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
-
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination: React.FC<IPaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,
@@ -31,11 +26,15 @@ const Pagination: React.FC<PaginationProps> = ({
     currentPage,
   });
 
+  if (totalPages === 0) {
+    return null;
+  }
+
   return (
     <StyledPaginationContainer>
       <Button
         name={STRINGS.PREVIOUS}
-        disabled={currentPage === 1}
+        disabled={currentPage === 1 || totalPages === 1}
         onClick={() => onPageChange(currentPage - 1)}
       />
       <StyledPaginationButtonsContainer>
@@ -55,7 +54,7 @@ const Pagination: React.FC<PaginationProps> = ({
       </StyledPaginationButtonsContainer>
       <Button
         name={STRINGS.NEXT}
-        disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages || totalPages === 1}
         onClick={() => onPageChange(currentPage + 1)}
       />
     </StyledPaginationContainer>

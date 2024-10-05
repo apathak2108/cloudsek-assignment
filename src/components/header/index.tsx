@@ -11,36 +11,59 @@ import {
 } from "./header.styled";
 import { useEffect, useState } from "react";
 import {
-  getUsersTotalCount,
-  searchUsers,
-} from "../../redux/actions/homeActions";
-import { debounce } from "../../utils";
+  setFilteredUsers,
+  setIsUsersFound,
+  setUserCount,
+} from "../../redux/actions/userActions";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
+  const { allUsers, filteredUsers, loading, error } = useSelector(
+    (state: RootState) => state?.user
+  );
+  const totalUsersCount = allUsers?.length;
+  const filteredUsersCount = filteredUsers?.length;
   const [query, setQuery] = useState<string>(STRINGS.EMPTY_STRING);
-  const count = useSelector((state: RootState) => state.home.count);
-  const loading = useSelector((state: RootState) => state.home.loading);
-
-  const debouncedSearch = debounce((query: string) => {
-    dispatch(searchUsers(query, STRINGS.EMPTY_STRING, 8));
-  }, 500);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    debouncedSearch(value);
   };
 
+  const filteredUser = allUsers?.filter((user) => {
+    const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
+    return fullName.includes(query.toLowerCase());
+  });
+
   useEffect(() => {
-    dispatch(getUsersTotalCount());
-  }, []);
+    if (query.length > 2) {
+      dispatch(setFilteredUsers(filteredUser));
+      const noUsersFound = filteredUser.length === 0;
+      dispatch(setUserCount(filteredUser.length));
+      dispatch(setIsUsersFound(!noUsersFound));
+    } else {
+      dispatch(setFilteredUsers([]));
+      dispatch(setUserCount(totalUsersCount));
+      dispatch(setIsUsersFound(true));
+    }
+  }, [query]);
+
+  const getUserCountText = (count: number) =>
+    `${count}\u00A0${count === 1 ? STRINGS.USER : STRINGS.USERS}`;
 
   return (
     <StyledHeaderContainer>
       <StyledHeaderInnerLeftContainer>
         <StyledHeading>{STRINGS.MAIN_HEADING}</StyledHeading>
-        {!loading && <Badge value={`${count}\u00A0${STRINGS.USERS}`} />}
+        {!loading && !error && (
+          <Badge
+            value={
+              query.length > 2
+                ? getUserCountText(filteredUsersCount)
+                : getUserCountText(totalUsersCount)
+            }
+          />
+        )}
       </StyledHeaderInnerLeftContainer>
       <StyledHeaderInnerRightContainer>
         <SearchBar value={query} onChange={handleInputChange} />

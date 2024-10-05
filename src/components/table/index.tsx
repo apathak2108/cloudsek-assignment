@@ -13,21 +13,35 @@ import UserCatalogue from "../catalogue";
 import { STRINGS, TABLE_HEADINGS } from "../../constants";
 import StatusBadge from "../statusBadge";
 import { useDispatch, useSelector } from "react-redux";
-import { searchUsers } from "../../redux/actions/homeActions";
 import { RootState } from "../../redux/rootReducer";
 import Loader from "../loader";
 import Badge from "../badge";
 import { capitalizeFirstLetter } from "../../utils";
+import { getAllUsersData, setUserCount } from "../../redux/actions/userActions";
 
 const CustomTable: React.FC = () => {
   const dispatch = useDispatch();
-  const { users, loading, error } = useSelector(
-    (state: RootState) => state.home
-  );
+  const {
+    paginatedUsers,
+    filteredUsers,
+    allUsers,
+    loading,
+    error,
+    isUsersFound,
+  } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    dispatch(searchUsers(STRINGS.EMPTY_STRING, STRINGS.EMPTY_STRING, 8));
+    dispatch(getAllUsersData());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (allUsers.length > 0) {
+      dispatch(setUserCount(allUsers.length));
+    }
+  }, [allUsers, dispatch]);
+
+  const usersToDisplay =
+    filteredUsers.length > 0 ? filteredUsers : paginatedUsers;
 
   return (
     <StyledTableContainer>
@@ -46,10 +60,14 @@ const CustomTable: React.FC = () => {
             </LoaderWrapper>
           )}
           {!loading && error && <LoaderWrapper>{error}</LoaderWrapper>}
+          {!loading && !error && !isUsersFound && (
+            <LoaderWrapper>{STRINGS.NO_USERS_MSG}</LoaderWrapper>
+          )}
           {!loading &&
             !error &&
-            users?.length > 0 &&
-            users.map((user: any, index: number) => (
+            isUsersFound &&
+            usersToDisplay?.length > 0 &&
+            usersToDisplay?.map((user: any, index: number) => (
               <StyledTableRow key={index} active={user.active}>
                 <StyledTableCell>
                   <UserCatalogue
