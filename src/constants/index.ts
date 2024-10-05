@@ -14,6 +14,7 @@ export const STRINGS = {
   EMPTY_STRING: "",
   THREE_DOTS: "...",
   NUMBER: "number",
+  USER: "user",
 } as const;
 
 export const URL = {
@@ -32,6 +33,8 @@ export const TABLE_HEADINGS = [
   "Email Address",
   "Teams",
 ];
+
+export const LIMIT = 8;
 
 export const API_URL = "https://retoolapi.dev/zhj0vN/data";
 

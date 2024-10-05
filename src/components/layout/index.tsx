@@ -10,12 +10,11 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const users = useSelector((state: RootState) => state.home.users);
   return (
     <StyledLayout>
       <Header />
       <StyledChildrenContainer>{children}</StyledChildrenContainer>
-      {users.length > 0 && <Footer />}
+     <Footer />
     </StyledLayout>
   );
 };
